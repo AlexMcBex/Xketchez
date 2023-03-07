@@ -44,7 +44,7 @@ With Xketchez you can show the world that anything can be art (even sketches) an
 | /arts/:artId  |    GET      | show     |
 | /arts/create|  GET |  new     |
 | /arts/  |    GET      | index     |
-| /arts/:artsId/edit | GET | edit |
+| /arts/:artId/edit | GET | edit |
 | /arts/:artId |    PUT      | update     |
 | /arts/:artId |    DELETE      | destroy     |
 
@@ -55,9 +55,9 @@ With Xketchez you can show the world that anything can be art (even sketches) an
 | /galleries/:galleryId |  GET | show   |
 | /galleries/create|  GET |  new     |
 | /galleries  |  POST |  create |
-| /galleries/:teamId/edit | GET |  edit      |
-| /galleries/:teamId/| PATCH/PUT |  update |
-| /galleries/:teamId | DELETE  |  destroy |
+| /galleries/:galleryId/edit | GET |  edit      |
+| /galleries/:galleryId/| PATCH/PUT |  update |
+| /galleries/:galleryId | DELETE  |  destroy |
 
 ### Profile
 | **URL** | **HTTP Verb** | **Action** |
