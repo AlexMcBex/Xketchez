@@ -2,7 +2,6 @@
 *The luXury of sketches*
 
 ## Overview
-
 What if I tell you that sketches can be art too? <br>
 In Xketchez you can show your artistic talent in a matter of minutes. Pick the first pen and paper you can find, make a quick drawing, follow your instinct (you don't need to put too much effort in it tho...), share it with the world and watch it becoming part of a high-class, luxurious, snob and (not so) eXclusive art gallery. <br>
 Describe to the world what powerful emotions you felt in all those 3 minutes of drawing. Browse other artists' masterpieces, grace them with a like and add them to your favorites list if you really like them.<br>
@@ -17,7 +16,7 @@ With Xketchez you can show the world that anything can be art (even sketches) an
 - Python
 - Django
 - Bulma
-- Node JS
+- pSQL
 - AWS
 
 ---
@@ -77,13 +76,11 @@ With Xketchez you can show the world that anything can be art (even sketches) an
 
 ## Entity Relationship Diagram
 
-
 ![entityRelationshipDiagram](/img/ERD.png)
 
 ---
 
 ## Wireframes
-
 
 ### Art Index / Gallery Show
 

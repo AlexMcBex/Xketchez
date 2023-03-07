@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xketchez</title>
+    <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" 
+    integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" 
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header class="navbar has-background-grey-darker has-text-white-ter">
+<div class="navbar-brand">
+    <a href="/" class="navbar-item has-text-white-ter">Xketchez</a>
+</div>
+</header>
+<main class="container">
+    {% block content %}
+{% endblock %}
+</main>
+
+<footer class="footer has-background-grey-darker">
+    <div class="content has-text-right"> <p> All rights reserved, &copy; 2023 Xketchez &nbsp;</p></div>
+</footer>
+
+</body>
+</html>
