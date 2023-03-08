@@ -1,10 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-    <h1 class="subtitle is-3">Art Gallery</h1>
-
-    {% for art in arts %}
-        <div class="card card-index">
+<div class="card card-detail">
   <div class="card-image">
     <figure class="image">
       <img src="{% static '/arts/' %}{{ art.file  }}" alt="{{art.description}}">
@@ -31,5 +28,4 @@
     </div>
   </div>
 </div>
-    {% endfor %}
 {% endblock %}

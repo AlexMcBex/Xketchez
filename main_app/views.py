@@ -15,5 +15,9 @@ def about(req):
     return render(req, 'about.html')
 
 def arts_index(req):
-    arts= Art.Objects.all()
+    arts= Art.objects.all()
     return render(req, 'arts/index.html', { 'arts' : arts })
+
+def arts_detail(req, art_id):
+    art= Art.objects.get(id=art_id)
+    return render(req, 'arts/detail.html', { 'art': art })

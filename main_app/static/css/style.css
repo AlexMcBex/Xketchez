@@ -6,13 +6,18 @@ body {
 .card-image{
     border: 10px solid brown;
     padding: 5px;
+    max-height: fit-content;
 
 }
 .navbar-item:hover{
     color:black;
 }
-.card{
+.card-index{
     max-width: 400px;
+    border: 10px solid gray;
+}
+.card-detail{
+    max-width: 80%;
     border: 10px solid gray;
 }
 
