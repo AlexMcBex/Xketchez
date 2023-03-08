@@ -1,12 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Art
-
-# arts = [
-#     {'title' : "Ramona Flowers' portrait", 'author': 'Scott Pilgrim', 'type': 'drawing', 'method': 'marker on A3 paper', 'comment': 'Have you seen a woman at a party with this hair?', 'likes': 4, 'file': 'ramona-flowers.jpg', 'description': 'A portrait of Ramona Flowers', 'year': 2008},
-#     {'title' : "Human Perfection", 'author': 'Leonardo da Vinci', 'type': 'drawing', 'method': 'pencil on scroll', 'comment': 'Modestamente, ho creato questo in 10 minuti.', 'likes': 10000000000, 'file': 'leonardo-da-vinci.webp', 'description': 'the famouse sketch by Leonardo da Vinci', 'year': 1412},
-#     {'title' : "Heisenberg", 'author': 'DEA', 'type': 'sketch', 'method': 'pen on paper', 'comment': 'Do you know this man?', 'likes': 2301, 'file': 'heisenberg.jpg', 'description': 'a sketch of heisenberg', 'year': 2010}
-# ]
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def home(req):
@@ -34,3 +32,26 @@ class ArtUpdate(UpdateView):
 class ArtDelete(DeleteView):
     model = Art
     success_url = '/arts/'
+
+
+def signup(request):
+# this view is going to be like our class based views
+# because this is going to be able to handle a GET and a POST request
+    error_message = ''
+    if request.method == 'POST':
+        # this is how to create a user form object that includes data from the browser
+        form = UserCreationForm(request.POST)
+        # now we check validity of the form, and handle our success and error situations
+        if form.is_valid():
+            # we'll add the user to the database
+            user = form.save()
+            # then we'll log the user in
+            login(request, user)
+            # redirect to our index page
+            return redirect('index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    # a bad POST or GET request will render signup.html with an empty form
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)

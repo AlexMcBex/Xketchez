@@ -27,9 +27,7 @@
       </a>
 </div>
 <div class="navbar-menu has-text-white-ter">
-    <a class="navbar-item has-text-white-ter" href="/">
-        Home
-      </a>
+  {% if user.is_authenticated %}
       <a class="navbar-item has-text-white-ter" href="{% url 'about' %}">
         About
       </a>
@@ -39,6 +37,14 @@
       <a class="navbar-item has-text-white-ter" href="{% url 'art_create' %}">
         Post Art
       </a>
+      <a class="navbar-item has-text-white-ter" href="{% url 'logout' %}">
+        Log Out
+      </a>
+      {% else %}
+      <div>{{ user.name }}</div>
+      <a class="navbar-item has-text-white-ter" href="{% url 'signup' %}"> Sign Up</a>
+      <a class="navbar-item has-text-white-ter" href="{% url 'login' %}"> Log In</a>
+      {% endif %}
     
 </div>
 </nav>
