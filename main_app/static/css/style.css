@@ -15,9 +15,10 @@ body {
 .card-index{
     max-width: 400px;
     border: 10px solid gray;
+    margin: 10px;
 }
 .card-detail{
-    max-width: 80%;
+    max-width: 800px;
     border: 10px solid gray;
 }
 
