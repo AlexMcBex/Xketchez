@@ -30,10 +30,14 @@
     <a class="navbar-item has-text-white-ter" href="/">
         Home
       </a>
-      <a class="navbar-item has-text-white-ter" href="/about">
+      <a class="navbar-item has-text-white-ter" href="{% url 'about' %}">
         About
-      </a><a class="navbar-item has-text-white-ter" href="/arts">
+      </a>
+      <a class="navbar-item has-text-white-ter" href="{% url 'index' %}">
         Art Gallery
+      </a>
+      <a class="navbar-item has-text-white-ter" href="{% url 'art_create' %}">
+        Post Art
       </a>
     
 </div>

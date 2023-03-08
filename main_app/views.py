@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 from .models import Art
 
 # arts = [
@@ -21,3 +22,7 @@ def arts_index(req):
 def arts_detail(req, art_id):
     art= Art.objects.get(id=art_id)
     return render(req, 'arts/detail.html', { 'art': art })
+
+class ArtCreate(CreateView):
+    model = Art
+    fields = '__all__'

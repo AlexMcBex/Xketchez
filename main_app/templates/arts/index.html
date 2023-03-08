@@ -7,7 +7,7 @@
         <div class="card card-index">
   <div class="card-image">
     <figure class="image">
-      <img src="{% static '/arts/' %}{{ art.file  }}" alt="{{art.description}}">
+      <a href="/arts/{{ art.id }}"><img src="{% static '/arts/' %}{{ art.file  }}" alt="{{art.description}}"></a>
     </figure>
   </div>
   <div class="card-content">
