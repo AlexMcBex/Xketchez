@@ -11,16 +11,35 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
+
+env = environ.Env(
+    DEBUG = (bool, False)
+    
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y&6))%%&_ek%k&s0d327@s1^4^p6cos(($d&okk95it%2d!1-*'
+# SECRET_KEY = 'django-insecure-y&6))%%&_ek%k&s0d327@s1^4^p6cos(($d&okk95it%2d!1-*'
+SECRET_KEY = env('SECRET_KEY')
+AWS_ACCESS_KEY = env('AWS_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+S3_BUCKET = env('S3_BUCKET')
+S3_BASE_URL = env('S3_BASE_URL')
+
+print(' this is SECRET_KEY :', SECRET_KEY)
+print(' this is AWS_ACCESS_KEY :', AWS_ACCESS_KEY)
+print(' this is AWS_SECRET_ACCESS_KEY :', AWS_SECRET_ACCESS_KEY)
+print(' this is S3_BUCKET :', S3_BUCKET)
+print(' this is S3_BASE_URL :', S3_BASE_URL)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -116,7 +135,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+# if not DEBUG:
+# Tell Django to copy statics to the `staticfiles` directory
+# in your application directory on Render.
+STATIC_URL = os.path.join(BASE_DIR, 'static/')
+# print('THIS IS STATIC_URL', STATIC_URL)
+
+# Turn on WhiteNoise storage backend that takes care of compressing static files
+# and creating unique names for each version so they can safely be cached forever.
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

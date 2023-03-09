@@ -12,6 +12,7 @@ class Art(models.Model):
     likes = models.IntegerField
     description = models.CharField(max_length=300)
     file = models.CharField(max_length=200, default="smile.jpg")
+    # created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.title} by {self.author}'
@@ -19,4 +20,9 @@ class Art(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'art_id' : self.id})
     
-    
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    art = models.ForeignKey(Art, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for art_id: {self.art_id} @{self.url}"

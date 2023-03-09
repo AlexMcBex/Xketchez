@@ -4,7 +4,23 @@
 <div class="card card-detail">
   <div class="card-image">
     <figure class="image">
-      <img src="{% static '/arts/' %}{{ art.file  }}" alt="{{art.description}}">
+      {% if  art.photo_set.all %}
+      {% for photo in art.photo_set.all %}
+      <img src="{{ photo.url }}" alt="{{art.description}}">
+      {% endfor %}
+      {% else %}
+      <form 
+      class="card-panel"
+      action="{% url 'add_photo' art.id %}"
+      method="POST"
+      enctype="multipart/form-data" 
+  >
+      {% csrf_token %}
+      <input type="file" name="photo-file" />
+      <br/><br/>
+      <input type="submit" class="btn" value="Upload Photo"/>
+  </form>
+      {% endif %}
     </figure>
   </div>
   <div class="card-content">

@@ -7,7 +7,15 @@
         <div class="card card-index">
   <div class="card-image">
     <figure class="image">
-      <a href="/arts/{{ art.id }}"><img src="{% static '/arts/' %}{{ art.file  }}" alt="{{art.description}}"></a>
+      <a href="/arts/{{ art.id }}">
+        {% if art.photo_set.all %}
+        {% for photo in art.photo_set.all %}
+        <img src="{{ photo.url }}" alt="{{art.description}}">
+        {% endfor %}
+        {% else %}
+        <img src="{% static '/arts/' %}{{ art.file  }}" alt="{{art.description}}">
+        {% endif %}
+      </a>
     </figure>
   </div>
   <div class="card-content">
