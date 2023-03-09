@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-    <h1 class="subtitle is-3">Art Gallery</h1>
+<h1 class="subtitle is-3">Art Gallery</h1>
 
-    {% for art in arts %}
-        <div class="card card-index">
+{% for art in arts %}
+<div class="card card-index">
   <div class="card-image">
     <figure class="image">
       <a href="/arts/{{ art.id }}">
@@ -18,7 +18,10 @@
       </a>
     </figure>
   </div>
-  <div class="card-content">
+  <!-- card content -->
+  
+  <a href="/arts/{{ art.id }}">
+  <div class="card-content card-content-index">
     <div class="media">
       <div class="media-left">
         <figure class="image is-48x48">
@@ -27,17 +30,14 @@
       </div>
       <div class="media-content">
         <p class="title is-4">{{art.title}}</p>
-        <p class="subtitle is-6">{{art.author}}</p>
+        <p class="subtitle is-6">by {{art.author}}</p>
       </div>
     </div>
 
-    <div class="content">
-       <i> {{art.comment}}</i>
-       <hr>
-      {{art.method}}
-      <br>
-    </div>
+
   </div>
+  
+</a>
 </div>
-    {% endfor %}
+{% endfor %}
 {% endblock %}
