@@ -35,11 +35,11 @@ AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 S3_BUCKET = env('S3_BUCKET')
 S3_BASE_URL = env('S3_BASE_URL')
 
-print(' this is SECRET_KEY :', SECRET_KEY)
-print(' this is AWS_ACCESS_KEY :', AWS_ACCESS_KEY)
-print(' this is AWS_SECRET_ACCESS_KEY :', AWS_SECRET_ACCESS_KEY)
-print(' this is S3_BUCKET :', S3_BUCKET)
-print(' this is S3_BASE_URL :', S3_BASE_URL)
+# print(' this is SECRET_KEY :', SECRET_KEY)
+# print(' this is AWS_ACCESS_KEY :', AWS_ACCESS_KEY)
+# print(' this is AWS_SECRET_ACCESS_KEY :', AWS_SECRET_ACCESS_KEY)
+# print(' this is S3_BUCKET :', S3_BUCKET)
+# print(' this is S3_BASE_URL :', S3_BASE_URL)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,10 +96,13 @@ WSGI_APPLICATION = 'xketchez.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'xketchez',
+        'NAME': 'xketchez2',
     }
 }
 
+DATETIME_FORMAT = 'Y/m/d'
+USE_L10N = False
+USE_TZ = False
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

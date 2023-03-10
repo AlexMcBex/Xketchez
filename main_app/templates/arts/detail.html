@@ -4,22 +4,17 @@
 <div class="card card-detail">
   <div class="card-image">
     <figure class="image">
-      {% if  art.photo_set.all %}
+      {% if art.photo_set.all %}
       {% for photo in art.photo_set.all %}
       <img src="{{ photo.url }}" alt="{{art.description}}">
       {% endfor %}
       {% else %}
-      <form 
-      class="card-panel"
-      action="{% url 'add_photo' art.id %}"
-      method="POST"
-      enctype="multipart/form-data" 
-  >
-      {% csrf_token %}
-      <input type="file" name="photo-file" />
-      <br/><br/>
-      <input type="submit" class="btn" value="Upload Photo"/>
-  </form>
+      <form class="card-panel" action="{% url 'add_photo' art.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="photo-file" />
+        <br /><br />
+        <input type="submit" class="button" value="Upload Photo" />
+      </form>
       {% endif %}
     </figure>
   </div>
@@ -32,20 +27,20 @@
       </div>
       <div class="media-content">
         <p class="title is-4">{{art.title}}</p>
-        <p class="subtitle is-6">{{art.author}}</p>
+        <p class="subtitle is-6"> by {{art.user.username}}</p>
       </div>
     </div>
 
     <div class="content">
-       <i> {{art.comment}}</i>
-       <hr>
-      {{art.method}}
+      <i> {{art.author_comment}}</i>
+      <hr>
+      {{art.method}} - {{art.date}}
       <br>
     </div>
   </div>
   <div class="card-footer">
     <a href="{% url 'arts_update' art.id %}" class="button card-footer-item">Edit</a>
     <a href="{% url 'arts_delete' art.id %}" class="button card-footer-item">Delete</a>
-</div>
+  </div>
 </div>
 {% endblock %}

@@ -31,7 +31,13 @@ def arts_detail(req, art_id):
 
 class ArtCreate(CreateView):
     model = Art
-    fields = ['title', 'type', 'method', 'comment', 'description']
+    fields = ['title', 'type', 'method', 'author_comment', 'description']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+
+        return super().form_valid(form)
+    
 
 def add_photo(request, art_id):
     photo_file = request.FILES.get('photo-file', None)
@@ -51,7 +57,7 @@ def add_photo(request, art_id):
 
 class ArtUpdate(UpdateView):
     model = Art
-    fields = ['title', 'method', 'comment', 'description']
+    fields = ['title', 'method', 'author_comment', 'description']
 
 class ArtDelete(DeleteView):
     model = Art

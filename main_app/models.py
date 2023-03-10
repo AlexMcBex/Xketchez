@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 # Create your models here.
 class Art(models.Model):
@@ -8,15 +9,15 @@ class Art(models.Model):
     author = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
     method = models.CharField(max_length=200)
-    comment = models.CharField(max_length=300)
+    author_comment = models.CharField(max_length=300)
     likes = models.IntegerField
     description = models.CharField(max_length=300)
     file = models.CharField(max_length=200, default="smile.jpg")
-    # date = models.DateTimeField(auto_now_add=True)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=now, editable=False, )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.title} by {self.author}'
+        return f'{self.title} by {self.user.username}'
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'art_id' : self.id})
@@ -28,10 +29,12 @@ class Photo(models.Model):
     def __str__(self):
         return f"Photo for art_id: {self.art_id} @{self.url}"
     
-    class Comment(models.Model):
+class Comment(models.Model):
         date = models.DateTimeField(auto_now_add=True)
         text = models.CharField(max_length=500)
         user = models.ForeignKey(User, on_delete=models.CASCADE)
+        art_piece = models.ForeignKey(Art, on_delete=models.CASCADE)
 
         def __str__ (self):
-            return f'{self.user.username} commented: \n{self.text}'
+            return f'{self.user.username} commented: \n"{self.text}" in {self.art_piece.title}'
+        

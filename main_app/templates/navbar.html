@@ -31,9 +31,13 @@
           <a class="navbar-item" href="/arts">
             Art Gallery
           </a>
+          {% if user.is_authenticated %}
           <a class="navbar-item" href="/arts/create">
             Create Art
           </a>
+          {% else %}
+          <p class="navbar-item">- Log In to Create Art -</p>
+          {% endif %}
           <a class="navbar-item">
             Contact
           </a>
@@ -44,16 +48,22 @@
         </div>
       </div>
     </div>
-
     <div class="navbar-end">
+
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button">
-            <strong>Sign up</strong>
+          {% if user.is_authenticated %}
+          <a class="button" href="{% url 'logout' %}">
+            <strong>Log Out</strong>
           </a>
-          <a class="button">
+          {% else %}
+          <a class="button" href="/accounts/login">
             <strong>Log In</strong>
           </a>
+          <a class="button" href="/accounts/signup">
+            <strong>Sign Up</strong>
+          </a>
+          {% endif %}
         </div>
       </div>
     </div>
