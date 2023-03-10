@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<h1 class="subtitle is-3">Art Gallery</h1>
-
+<h1 class="subtitle is-3 xketchez has-text-white-ter has-text-centered">Art Gallery</h1>
+<div class="index-container">
 {% for art in arts %}
 <div class="card card-index">
   <div class="card-image">
@@ -40,4 +40,5 @@
 </a>
 </div>
 {% endfor %}
+</div>
 {% endblock %}

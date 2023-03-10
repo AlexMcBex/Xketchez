@@ -1,63 +1,53 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xketchez</title>
-    <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" 
-    integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" 
-    crossorigin="anonymous" 
-    referrerpolicy="no-referrer" 
-    />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  {% include 'head.html' %}
 </head>
+
 <body>
-    <header>
-    <nav class="navbar  has-background-grey-darker has-text-white-ter" role='navigation' aria-label="main navigation">
-<div class="navbar-brand subtitle is-3">
-    <a href="/" class="navbar-item has-text-white-ter">Xketchez</a>
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-</div>
-<div class="navbar-menu has-text-white-ter">
-  {% if user.is_authenticated %}
-      <a class="navbar-item has-text-white-ter" href="{% url 'about' %}">
-        About
-      </a>
-      <a class="navbar-item has-text-white-ter" href="{% url 'index' %}">
-        Art Gallery
-      </a>
-      <a class="navbar-item has-text-white-ter" href="{% url 'art_create' %}">
-        Post Art
-      </a>
-      <a class="navbar-item has-text-white-ter" href="{% url 'logout' %}">
-        Log Out
-      </a>
-      {% else %}
-      <div>{{ user.name }}</div>
-      <a class="navbar-item has-text-white-ter" href="{% url 'signup' %}"> Sign Up</a>
-      <a class="navbar-item has-text-white-ter" href="{% url 'login' %}"> Log In</a>
-      {% endif %}
+  <header>
+    {% include 'navbar.html' %}
+  </header>
+  <div id="block" style="height: 66px">  </div>
+  <main>
+    <section class="container">
+    {% block content %}
+    {% endblock %}
+  </section>
+  </main>
+  <footer>
+    {% include 'footer.html' %}
+  </footer>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
     
-</div>
-</nav>
-
-</header>
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-<footer class="footer has-background-grey-darker">
-    <div class="content has-text-right"> <p> All rights reserved, &copy; 2023 Xketchez &nbsp;</p></div>
-</footer>
-
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+    
+      // Add a click event on each of them
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+    
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          console.log($navbarBurgers, target, $target)
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+    
+        });
+      });
+    }
+    
+    });
+    </script>
 </body>
+
 </html>
