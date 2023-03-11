@@ -3,42 +3,47 @@
 {% load static %}
 <h1 class="subtitle is-3 xketchez has-text-white-ter has-text-centered">Art Gallery</h1>
 <div class="index-container">
-{% for art in arts %}
-<div class="card card-index">
-  <div class="card-image">
-    <figure class="image">
-      <a href="/arts/{{ art.id }}">
-        {% if art.photo_set.all %}
-        {% for photo in art.photo_set.all %}
-        <img src="{{ photo.url }}" alt="{{art.description}}">
-        {% endfor %}
-        {% else %}
-        <img src="{% static '/arts/' %}{{ art.file  }}" alt="{{art.description}}">
-        {% endif %}
-      </a>
-    </figure>
-  </div>
-  <!-- card content -->
-  
-  <a href="/arts/{{ art.id }}">
-  <div class="card-content card-content-index">
-    <div class="media">
-      <div class="media-left">
-        <figure class="image is-48x48">
-          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+
+  {% for art in arts %}
+  <div class="card card-index">
+    <div class="card-frame">
+      <div class="card-image">
+        <figure class="image">
+          <a href="/arts/{{ art.id }}">
+            {% if art.photo_set.all %}
+
+            {% for photo in art.photo_set.all %}
+            <img src="{{ photo.url }}" alt="{{art.description}}">
+            {% endfor %}
+            {% else %}
+            <img src="{% static '/arts/' %}{{ art.file  }}" alt="{{art.description}}">
+            {% endif %}
+          </a>
         </figure>
+        <!-- card content -->
+
+        <a href="/arts/{{ art.id }}">
+          <div class="card-content card-content-index">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="media-content index-text">
+                <p class="title is-4 is-black index-text">{{art.title}}</p>
+                <p class="subtitle is-6 is-black index-text">by {{art.user.username}}</p>
+              </div>
+            </div>
+          </div>
       </div>
-      <div class="media-content">
-        <p class="title is-4">{{art.title}}</p>
-        <p class="subtitle is-6">by {{art.user.username}}</p>
-      </div>
+
+
+
     </div>
 
-
+    </a>
   </div>
-  
-</a>
-</div>
-{% endfor %}
+  {% endfor %}
 </div>
 {% endblock %}

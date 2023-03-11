@@ -33,22 +33,32 @@ header {
 
 .card-image {
   border: 10px solid black;
-  max-height: fit-content;
-
+  /* max-height: fit-content; */
+  height: 100%;
 }
-
+.card-frame{
+  background-color: black; 
+  background-image: linear-gradient(black, white);
+  border: 10px solid goldenrod;
+  border-radius: 5px;
+}
 .navbar-item:hover {
   color: black;
 }
 .index-container{
-  display:grid;
-
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(auto, 250px); */
 }
 .card-index {
   max-width: 30%;
-  border: 10px solid gray;
+  width: 100%;
   margin: 10px;
   padding: .5rem;
+  background-color: black;
 }
 
 .card-detail {
@@ -92,12 +102,17 @@ main {
     text-align: center;
   }
 
-  .card-index:hover .card-image {
+  .card-frame:hover .card-image {
     opacity: 0.3;
   }
 
-  .card-index:hover .card-content-index {
+  .card-frame:hover .card-content-index{
     opacity: 1;
+  }
+  .card-frame:hover .index-text{
+    opacity: 1;
+    z-index: 10;
+    color: black;
   }
 
   .container {
