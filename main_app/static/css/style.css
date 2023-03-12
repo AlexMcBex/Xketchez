@@ -38,7 +38,7 @@ header {
 }
 .card-frame{
   background-color: black; 
-  background-image: linear-gradient(black, white);
+  /* background-image: linear-gradient(black, rgb(183, 183, 183)); */
   border: 10px solid goldenrod;
   border-radius: 5px;
 }
@@ -65,7 +65,7 @@ header {
   /* width: 60%; */
   height: auto;
   width: auto;
-  border: 10px solid gray;
+  border: 10px solid goldenrod;
 }
 
 main {
@@ -110,7 +110,7 @@ main {
     opacity: 1;
   }
   .card-frame:hover .index-text{
-    opacity: 1;
+    opacity: 2;
     z-index: 10;
     color: black;
   }
