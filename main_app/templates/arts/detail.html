@@ -1,51 +1,94 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<div class="card card-detail">
-  <div class="card-image">
-    <figure class="image">
-      {% if  art.photo_set.all %}
-      {% for photo in art.photo_set.all %}
-      <img src="{{ photo.url }}" alt="{{art.description}}">
-      {% endfor %}
-      {% else %}
-      <form 
-      class="card-panel"
-      action="{% url 'add_photo' art.id %}"
-      method="POST"
-      enctype="multipart/form-data" 
-  >
-      {% csrf_token %}
-      <input type="file" name="photo-file" />
-      <br/><br/>
-      <input type="submit" class="btn" value="Upload Photo"/>
-  </form>
-      {% endif %}
-    </figure>
-  </div>
-  <div class="card-content">
-    <div class="media">
-      <div class="media-left">
-        <figure class="image is-48x48">
-          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+<div class="columns">
+  <div class="column is-8">
+    <div class="card card-detail">
+      <div class="card-image">
+        <figure class="image">
+          {% if art.photo_set.all %}
+          {% for photo in art.photo_set.all %}
+          <img src="{{ photo.url }}" alt="{{art.description}}">
+          {% endfor %}
+          {% else %}
+          <form class="card-panel" action="{% url 'add_photo' art.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="photo-file" />
+            <br /><br />
+            <input type="submit" class="button" value="Upload Photo" />
+          </form>
+          {% endif %}
         </figure>
       </div>
-      <div class="media-content">
-        <p class="title is-4">{{art.title}}</p>
-        <p class="subtitle is-6">{{art.author}}</p>
-      </div>
-    </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">{{art.title}}</p>
+            <p class="subtitle is-6"> by {{art.user.username}}</p>
+          </div>
+        </div>
 
-    <div class="content">
-       <i> {{art.comment}}</i>
-       <hr>
-      {{art.method}}
-      <br>
+        <div class="content">
+          <i> {{art.author_comment}}</i>
+          <hr>
+          {{art.method}} - {{art.date}}
+          <br>
+        </div>
+      </div>
+      {% if user.is_authenticated and user.id == art.user.id %}
+      <div class="card-footer">
+        <a href="{% url 'arts_update' art.id %}" class="button card-footer-item">Edit</a>
+        <a href="{% url 'arts_delete' art.id %}" class="button card-footer-item">Delete</a>
+      </div>
+      {% endif %}
     </div>
   </div>
-  <div class="card-footer">
-    <a href="{% url 'arts_update' art.id %}" class="button card-footer-item">Edit</a>
-    <a href="{% url 'arts_delete' art.id %}" class="button card-footer-item">Delete</a>
-</div>
-</div>
-{% endblock %}
+  <div class="column is-4">
+    <div class="card is-darker p-3">
+      <div class="card-header p-1">
+        <strong>Comments</strong>
+      </div>
+      {% if user.is_authenticated %}
+      <form 
+        action="{% url 'add_comment' art.id %}" 
+        method="POST"
+        class="input"
+        >
+         {% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="submit" class="button" value="Add Comment">
+    </form>
+    {% else %}
+    <p><a href="{% url 'login' %}" class="button">Log In</a> to comment this art</p>
+      {% endif %}
+      {% if art.comment_set.all %}
+      {% for comment in art.comment_set.all %}
+      <div class="card m-2">
+        <div class="card-content card-content-comment">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="media-content index-text">
+              <i class="is-black index-text">{{ comment.user.username }}</i>
+              <p class="subtitle is-5 is-black index-text">{{ comment.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="card">
+        <i class="m-2">no Comments yet</i>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Art, Photo
+from .forms import CommentForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -27,11 +28,22 @@ def arts_index(req):
 
 def arts_detail(req, art_id):
     art= Art.objects.get(id=art_id)
-    return render(req, 'arts/detail.html', { 'art': art })
+
+    comment_form = CommentForm()
+
+    return render(req, 'arts/detail.html', { 'art': art , 'comment_form': comment_form })
+
+
 
 class ArtCreate(CreateView):
     model = Art
-    fields = ['title', 'type', 'method', 'comment', 'description']
+    fields = ['title', 'type', 'method', 'author_comment', 'description']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+
+        return super().form_valid(form)
+    
 
 def add_photo(request, art_id):
     photo_file = request.FILES.get('photo-file', None)
@@ -51,7 +63,7 @@ def add_photo(request, art_id):
 
 class ArtUpdate(UpdateView):
     model = Art
-    fields = ['title', 'method', 'comment', 'description']
+    fields = ['title', 'method', 'author_comment', 'description']
 
 class ArtDelete(DeleteView):
     model = Art
@@ -79,3 +91,13 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+def add_comment(req, art_id):
+    form = CommentForm(req.POST)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.art_piece_id = art_id
+        new_comment.user = req.user
+        # print(user_id)
+        new_comment.save()
+    return redirect('detail', art_id=art_id)
