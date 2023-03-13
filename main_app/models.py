@@ -22,6 +22,12 @@ class Art(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'art_id' : self.id})
     
+    def increase_like(self):
+        self.likes+=1
+
+    def decrease_like(self):
+        self.likes -=1
+
     class Meta:
         ordering = ['-date']
     

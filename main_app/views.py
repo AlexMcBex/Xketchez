@@ -35,7 +35,7 @@ def arts_detail(req, art_id):
 
 
 
-class ArtCreate(CreateView):
+class ArtCreate(LoginRequiredMixin, CreateView):
     model = Art
     fields = ['title', 'type', 'method', 'author_comment', 'description']
 
@@ -45,6 +45,7 @@ class ArtCreate(CreateView):
         return super().form_valid(form)
     
 
+@login_required
 def add_photo(request, art_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
@@ -61,11 +62,11 @@ def add_photo(request, art_id):
     return redirect('detail', art_id=art_id)
 
 
-class ArtUpdate(UpdateView):
+class ArtUpdate(LoginRequiredMixin, UpdateView):
     model = Art
     fields = ['title', 'method', 'author_comment', 'description']
 
-class ArtDelete(DeleteView):
+class ArtDelete(LoginRequiredMixin, DeleteView):
     model = Art
     success_url = '/arts/'
 
@@ -92,6 +93,7 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+@login_required
 def add_comment(req, art_id):
     form = CommentForm(req.POST)
     if form.is_valid():
