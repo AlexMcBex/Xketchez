@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 import environ
 import os
 
@@ -42,9 +43,16 @@ S3_BASE_URL = env('S3_BASE_URL')
 # print(' this is S3_BASE_URL :', S3_BASE_URL)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = 'RENDER' not in os.environ
+
 
 ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:    
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 
 
 # Application definition
@@ -61,6 +69,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -93,12 +102,19 @@ WSGI_APPLICATION = 'xketchez.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'xketchez2',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'xketchez2',
-    }
-}
+    'default': dj_database_url.config(     
+    default='postgresql://postgres:postgres@localhost:5432/xketchez2',        
+    conn_max_age=600    
+) }
+
 
 DATETIME_FORMAT = 'Y/m/d'
 USE_L10N = False
@@ -144,6 +160,16 @@ USE_TZ = True
 # in your application directory on Render.
 STATIC_URL = os.path.join(BASE_DIR, 'static/')
 # print('THIS IS STATIC_URL', STATIC_URL)
+
+if not DEBUG:
+    # Tell Django to copy statics to the `staticfiles` directory
+    # in your application directory on Render.
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    # Turn on WhiteNoise storage backend that takes care of compressing static files
+    # and creating unique names for each version so they can safely be cached forever.
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Turn on WhiteNoise storage backend that takes care of compressing static files
 # and creating unique names for each version so they can safely be cached forever.
