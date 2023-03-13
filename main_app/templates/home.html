@@ -1,6 +1,68 @@
 {% extends 'base.html' %}
-{% block   content %}
+{% block content %}
 
-<h1 class="title is-1 has-text-light">Home Page</h1>
+<h1 class="xketchez home-title title is-1 has-text-white-ter"
+    style="text-align: center; font-size: 100px; margin: 50px"> <span class="X">X</span>ketchez</h1>
 
+<h3 class="xketchez home-subtitle title is-1 has-text-white-ter"
+    style="text-align: center; font-size: 40px; margin: 50px"> The lu<span class="X">X</span>ury of sketches</h3>
+
+<div class="column" style="text-align: center;">
+    {% if user.is_authenticated %}
+    <p class="link-home-4 link-home-user">Welcome {{user.username}} </p> <br><br>
+    <a href="/about/" class="link-home link-home-1 ">About Xketchez</a> <br><br>
+    <a href="/arts/" class="link-home link-home-2">Art Gallery</a> <br><br>
+    <a href="/arts/create" class="link-home link-home-3">Post your Art</a> <br><br>
+    {% else %}
+    <a href="/about/" class="link-home link-home-1">About Xketchez</a> <br><br>
+    <a href="/arts/" class="link-home link-home-2">Art Gallery</a> <br><br>
+    <a href="/accounts/login" class="link-home link-home-3">Log In</a> <br><br>
+    <a href="/accounts/signup" class="link-home link-home-4">Sign Up</a> <br><br>
+    {% endif %}
+    <small class="final-home"> <hr style="height:1px; color: goldenrod"> coded by Alessio Belli</small>
+</div>
+
+<script>
+    const title = document.getElementsByClassName('home-title')
+    const subtitle = document.getElementsByClassName('home-subtitle')
+    const link1 = document.getElementsByClassName('link-home-1')
+    const link2 = document.getElementsByClassName('link-home-2')
+    const link3 = document.getElementsByClassName('link-home-3')
+    const link4 = document.getElementsByClassName('link-home-4')
+    const final = document.getElementsByClassName('final-home')
+
+
+    addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            // console.log(title)
+            title[0].style.opacity= "1";
+        }, 250)
+        setTimeout(() => {
+            subtitle[0].style.opacity = "1"; 
+        }, 1250)
+        setTimeout(() => {
+        link1[0].style.opacity = "1"; 
+    }, 2250)
+        setTimeout(() => {
+        link2[0].style.opacity = "1"; 
+    }, 2450)
+        setTimeout(() => {
+       link3[0].style.opacity = "1"; 
+    }, 2650)
+    if (link4){
+            setTimeout(() => {
+            link4[0].style.opacity = "1"; 
+        }, 2850)
+        setTimeout(() => {
+            final[0].style.opacity = "1"; 
+        }, 3050)
+    }else{
+        setTimeout(() => {
+            final[0].style.opacity = "1"; 
+        }, 2850)
+    }
+
+    });
+
+</script>
 {% endblock %}
