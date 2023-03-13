@@ -20,6 +20,7 @@
             {% endif %}
           </a>
         </figure>
+
         <!-- card content -->
 
         <a href="/arts/{{ art.id }}">
@@ -31,8 +32,8 @@
                 </figure>
               </div>
               <div class="media-content index-text">
-                <p class="title is-4 is-black index-text">{{art.title}}</p>
-                <p class="subtitle is-6 is-black index-text">by {{art.user.username}}</p>
+                <p class="index-text index-text-title">{{art.title}}</p>
+                <i class=" index-text index-text-author"> <small>by</small> {{art.user.username}}</i>
               </div>
             </div>
           </div>

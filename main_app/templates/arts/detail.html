@@ -36,8 +36,14 @@
         <div class="content">
           <i> {{art.author_comment}}</i>
           <hr>
-          {{art.method}} - {{art.date}}
-          <br>
+          <div class="container columns">
+            <div class="column left has-text-left">
+              {{art.method}} - {{art.date}}
+            </div>
+            <div class="column right has-text-right">
+              <p class="is-3"><button class="button like-button">Like</button>  <img src="{% static 'arts/like.png' %}" alt="like icon" style="display:inline">{{art.likes}}</p> 
+            </div>
+          </div>
         </div>
       </div>
       {% if user.is_authenticated and user.id == art.user.id %}
@@ -53,18 +59,15 @@
       <div class="card-header p-1">
         <strong>Comments</strong>
       </div>
+      <!-- COMMENT SECTION -->
       {% if user.is_authenticated %}
-      <form 
-        action="{% url 'add_comment' art.id %}" 
-        method="POST"
-        class="input"
-        >
-         {% csrf_token %}
+      <form action="{% url 'add_comment' art.id %}" method="POST" class="input">
+        {% csrf_token %}
         {{ comment_form.as_p }}
-        <input type="submit" class="button" value="Add Comment">
-    </form>
-    {% else %}
-    <p><a href="{% url 'login' %}" class="button">Log In</a> to comment this art</p>
+        <input type="submit" class="button" value="Send" style="display:block">
+      </form>
+      {% else %}
+      <p><a href="{% url 'login' %}" class="button">Log In</a> to comment this art</p>
       {% endif %}
       {% if art.comment_set.all %}
       {% for comment in art.comment_set.all %}
