@@ -169,7 +169,7 @@ main {
 
 .home-subtitle{
   text-align: center; 
-  /* font-size: 100px;  */
+  font-size: 40px; 
   margin: 50px;
   opacity: 0;
   transition: 3s ease;
@@ -235,6 +235,7 @@ main {
     background-color: rgb(42, 42, 42);
     box-shadow: 0 8px 16px rgb(10 10 10 / 10%);
     padding: 0.5rem 0;
+    transition: .5s ease;
   }
   
 
@@ -249,7 +250,7 @@ main {
   .card-index {
     position: relative;
     /* width: 50%; */
-    max-width: 30%;
+    max-width: 25%;
   }
 
   .card-content-index{
@@ -264,5 +265,40 @@ main {
   
   .media-left{
     display: none;
+  }
+  .home-title{
+    font-size: 80px;
+  }
+  .link-home {
+    align-self: left;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size:30px;
+    font-style: italic;
+    color: goldenrod;
+    transition: .75s ease;
+    padding: 0 10px;
+    margin:0;
+    opacity: 0;
+    border-right: 10px double goldenrod;
+    border-left: 10px double goldenrod;
+  }
+  .final-home{
+    color: goldenrod;
+    transition: 2s ease;
+    opacity: 0
+  }
+  .link-home-user{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size:25px;
+    margin: 0;
+    font-style: italic;
+    color: goldenrod;
+    transition: .75s ease;
+    border: 10px double goldenrod;
+    padding: 0px 10px;
+    opacity: 0;
+    
   }
 }

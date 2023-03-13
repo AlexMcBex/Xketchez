@@ -10,9 +10,9 @@
   <header>
     {% include 'navbar.html' %}
   </header>
-  <div id="block" style="height: 75px ; background-color: black;">  </div>
+  <div id="block" style="height: 66px ; background-color: black;">  </div>
   <main>
-    <section class="container">
+    <section class="container p-5">
     {% block content %}
     {% endblock %}
   </section>
@@ -25,22 +25,20 @@
     document.addEventListener('DOMContentLoaded', () => {
     
     // Get all "navbar-burger" elements
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    const navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
     
     // Check if there are any navbar burgers
-    if ($navbarBurgers.length > 0) {
+    if (navbarBurgers.length > 0) {
     
       // Add a click event on each of them
-      $navbarBurgers.forEach( el => {
+      navbarBurgers.forEach( el => {
         el.addEventListener('click', () => {
     
-          // Get the target from the "data-target" attribute
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);
-          console.log($navbarBurgers, target, $target)
-          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          const idTarget = el.dataset.target;
+          const target = document.getElementById(idTarget);
+          console.log(navbarBurgers, idTarget, target)
           el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
+          target.classList.toggle('is-active');
     
         });
       });

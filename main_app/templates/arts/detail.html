@@ -40,9 +40,10 @@
             <div class="column left has-text-left">
               {{art.method}} - {{art.date}}
             </div>
-            <div class="column right has-text-right">
-              <p class="is-3"><button class="button like-button">Like</button>  <img src="{% static 'arts/like.png' %}" alt="like icon" style="display:inline">{{art.likes}}</p> 
-            </div>
+            <!-- <div class="column right has-text-right">
+              <p class="is-3">
+                 <form action="{{ art.increase_like }}" method="POST"><button class="button like-button" >Like</button></form>  <img src="{% static 'arts/like.png' %}" alt="like icon" style="display:inline">{{art.likes}}</p> 
+            </div> -->
           </div>
         </div>
       </div>
