@@ -111,10 +111,26 @@ header {
   color: goldenrod;
   transition: .75s ease;
   border: 0px solid goldenrod;
-  padding: 10px 50px;
+  padding: 10px 100px;
   opacity: 0;
 }
-
+.final-home{
+  color: goldenrod;
+  transition: 2s ease;
+  opacity: 0
+}
+.link-home-user{
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size:25px;
+  margin: 0;
+  font-style: italic;
+  color: goldenrod;
+  transition: .75s ease;
+  border: 10px double goldenrod;
+  padding: 0px 10px;
+  opacity: 0;
+}
 .link-home:hover {
   color: goldenrod;
   border: 10px double goldenrod
@@ -157,6 +173,7 @@ main {
   margin: 50px;
   opacity: 0;
   transition: 3s ease;
+  margin-bottom: 0;
 }
 
 /* DESKTOP */
