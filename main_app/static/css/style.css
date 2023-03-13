@@ -20,9 +20,9 @@ margin-right: 2px;
   font-family: 'Cormorant Garamond', serif;
   font-weight: 700;
   font-style: italic;
-  color: gold;
-}
+  color: goldenrod;
 
+}
 
 
 .footer {
@@ -96,10 +96,28 @@ header {
   transition: .5s ease;
   font-weight: 700;
 }
+
 .button:hover{
   transition: .5s ease;
   border: 2px solid gray;
   background-color: white;
+}
+
+.link-home {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size:30px;
+  font-style: italic;
+  color: goldenrod;
+  transition: .75s ease;
+  border: 0px solid goldenrod;
+  padding: 10px 50px;
+  opacity: 0;
+}
+
+.link-home:hover {
+  color: goldenrod;
+  border: 10px double goldenrod
 }
 .navbar-item{
   transition: .5s ease;
@@ -120,6 +138,25 @@ main {
 .index-text-author{
   color: rgb(37, 37, 37);
 
+}
+.home-title{
+  text-align: center; 
+  font-size: 100px; 
+  margin: 50px;
+  opacity: 0;
+  transition: 3s ease;
+}
+.button-home{
+  font-weight: 500;
+}
+
+
+.home-subtitle{
+  text-align: center; 
+  /* font-size: 100px;  */
+  margin: 50px;
+  opacity: 0;
+  transition: 3s ease;
 }
 
 /* DESKTOP */
@@ -147,12 +184,14 @@ main {
     width: 100%;
     opacity: 0;
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
   }
+
+
 
   .card-frame:hover .card-image {
     opacity: 0.6;

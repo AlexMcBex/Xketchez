@@ -22,6 +22,9 @@ class Art(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'art_id' : self.id})
     
+    class Meta:
+        ordering = ['-date']
+    
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     art = models.ForeignKey(Art, on_delete=models.CASCADE)
