@@ -208,7 +208,9 @@ main {
     text-align: center;
   }
 
-
+.user-link{
+  
+}
 
   .card-frame:hover .card-image {
     opacity: 0.6;

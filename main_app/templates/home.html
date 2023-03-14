@@ -9,10 +9,11 @@
 
 <div class="column" style="text-align: center;">
     {% if user.is_authenticated %}
-    <p class="link-home-4 link-home-user">Welcome {{user.username}} </p> <br><br>
+    <p class="link-home-5 link-home-user">Welcome {{user.username}} </p> <br><br>
     <a href="/about/" class="link-home link-home-1 ">About Xketchez</a> <br><br>
     <a href="/arts/" class="link-home link-home-2">Art Gallery</a> <br><br>
-    <a href="/arts/create" class="link-home link-home-3">Post your Art</a> <br><br>
+    <a href="/arts/mine" class="link-home link-home-3">Your Art</a> <br><br>
+    <a href="/arts/create" class="link-home link-home-4">Post your Art</a> <br><br>
     {% else %}
     <a href="/about/" class="link-home link-home-1">About Xketchez</a> <br><br>
     <a href="/arts/" class="link-home link-home-2">Art Gallery</a> <br><br>
@@ -29,6 +30,7 @@
     const link2 = document.getElementsByClassName('link-home-2')
     const link3 = document.getElementsByClassName('link-home-3')
     const link4 = document.getElementsByClassName('link-home-4')
+    const link5 = document.getElementsByClassName('link-home-5')
     const final = document.getElementsByClassName('final-home')
 
 
@@ -49,17 +51,20 @@
         setTimeout(() => {
        link3[0].style.opacity = "1"; 
     }, 2650)
-    if (link4){
-            setTimeout(() => {
+    setTimeout(() => {
             link4[0].style.opacity = "1"; 
         }, 2850)
+    if (link5){
+            setTimeout(() => {
+            link5[0].style.opacity = "1"; 
+        }, 3050)
         setTimeout(() => {
             final[0].style.opacity = "1"; 
-        }, 3050)
+        }, 3250)
     }else{
         setTimeout(() => {
             final[0].style.opacity = "1"; 
-        }, 2850)
+        }, 3050)
     }
 
     });

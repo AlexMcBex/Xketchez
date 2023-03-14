@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import uuid 
 import boto3
 from django.conf import settings
+from django.contrib.auth.models import User
 
 AWS_ACCESS_KEY = settings.AWS_ACCESS_KEY
 AWS_SECRET_ACCESS_KEY = settings.AWS_SECRET_ACCESS_KEY
@@ -26,11 +27,22 @@ def arts_index(req):
     arts= Art.objects.all()
     return render(req, 'arts/index.html', { 'arts' : arts })
 
+@login_required
+def arts_mine(req):
+    arts= Art.objects.filter(user=req.user)
+    return render(req, 'arts/index_mine.html', { 'arts' : arts })
+
+def arts_user(req, user_id):
+    user = User.objects.get(id = user_id)
+    arts= Art.objects.filter(user = user)
+    return render(req, 'arts/index_user.html', { 'arts' : arts , 'user': user})
+
 def arts_detail(req, art_id):
     art= Art.objects.get(id=art_id)
 
     comment_form = CommentForm()
-
+    
+    print(art.user.id)
     return render(req, 'arts/detail.html', { 'art': art , 'comment_form': comment_form })
 
 
