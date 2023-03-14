@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<h1 class="subtitle is-3 xketchez has-text-white-ter has-text-centered">Your Art Gallery</h1>
+<div class="index-container">
+
+  {% for art in arts %}
+  <div class="card card-index">
+    <div class="card-frame">
+      <div class="card-image">
+        <figure class="image">
+          <a href="/arts/{{ art.id }}">
+            {% if art.photo_set.all %}
+
+            {% for photo in art.photo_set.all %}
+            <img src="{{ photo.url }}" alt="{{art.description}}">
+            {% endfor %}
+            {% else %}
+            <img src="{% static '/arts/' %}{{ art.file  }}" alt="{{art.description}}">
+            {% endif %}
+          </a>
+        </figure>
+
+        <!-- card content -->
+
+        <a href="/arts/{{ art.id }}">
+          <div class="card-content card-content-index">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="media-content index-text">
+                <p class="index-text index-text-title">{{art.title}}</p>
+                <i class=" index-text index-text-author"> <small>by</small> {{art.user.username}}</i>
+              </div>
+            </div>
+          </div>
+      </div>
+
+
+
+    </div>
+
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
