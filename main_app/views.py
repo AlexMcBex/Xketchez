@@ -41,7 +41,7 @@ def arts_user(req, user_id):
 def arts_detail(req, art_id):
     art= Art.objects.get(id=art_id)
     comment_form = CommentForm()
-    print(art.comment_set.first().id)
+    # print(art.comment_set.all())
     return render(req, 'arts/detail.html', { 'art': art , 'comment_form': comment_form })
 
 
@@ -81,9 +81,9 @@ class ArtDelete(LoginRequiredMixin, DeleteView):
     model = Art
     success_url = '/arts/'
 
-# class CommentDelete(LoginRequiredMixin, DeleteView):
-#     model = Comment
-#     success_url = '/arts/{art_id}'
+class CommentDelete(LoginRequiredMixin, DeleteView):
+    model = Comment
+    success_url = '/arts/{art_id}'
 
 
 def signup(request):
