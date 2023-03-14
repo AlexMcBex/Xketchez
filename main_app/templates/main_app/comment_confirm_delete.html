@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Delete Comment on the art {{comment.art.name}}?</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Yes - Delete" class="button">
+        <a href="{% url 'detail' comment.art.id %}" class="button">Cancel</a>
+    </form>
+{% endblock %}

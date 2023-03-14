@@ -18,5 +18,6 @@ urlpatterns = [
     path('arts/<int:art_id>/add_photo', views.add_photo , name='add_photo'),
     path('arts/<int:art_id>/add_comment/', views.add_comment, name='add_comment'),
     path('arts/<int:art_id>', views.arts_detail, name='detail'),
+    # path('arts/<int:art_id>/comments/<int:pk>/delete', views.CommentDelete.as_view(), name='comment_delete'),
     path('accounts/signup/', views.signup, name='signup')
 ]

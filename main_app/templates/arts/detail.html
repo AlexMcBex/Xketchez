@@ -29,7 +29,8 @@
           </div>
           <div class="media-content">
             <p class="title is-4">{{art.title}}</p>
-            <p class="subtitle is-6"> by <a href="/arts/user/{{art.user.id}}" class="user-link">{{art.user.username}}</p></a>
+            <p class="subtitle is-6"> by <a href="/arts/user/{{art.user.id}}" class="user-link">{{art.user.username}}
+            </p></a>
           </div>
         </div>
 
@@ -73,26 +74,51 @@
       {% if art.comment_set.all %}
       {% for comment in art.comment_set.all %}
       <div class="card m-2">
+
+        {% if user.is_authenticated and comment.user == user %}
         <div class="card-content card-content-comment">
           <div class="media">
             <div class="media-left">
               <figure class="image is-48x48">
-                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                <a href="/arts/mine" class="user-link"><img src="https://bulma.io/images/placeholders/96x96.png"
+                    alt="Placeholder image"></a>
               </figure>
             </div>
             <div class="media-content index-text">
-              <i class="is-black index-text">{{ comment.user.username }}</i>
+              <i class="is-black index-text user-link"><a href="/arts/mine" class="user-link">{{comment.user.username}}</a></i>
               <p class="subtitle is-5 is-black index-text">{{ comment.text }}</p>
             </div>
           </div>
         </div>
       </div>
-      {% endfor %}
+      <!-- <div class="card-footer">
+        <a href="{% url 'comment_delete'  art.id comment.id %}" class="button is-danger card-footer-item comment-button">X</a>
+      </div> -->
       {% else %}
-      <div class="card">
-        <i class="m-2">no Comments yet</i>
+      <div class="card-content card-content-comment">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <a href="/arts/user/{{comment.user.id}}" class="user-link"><img
+                  src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"></a>
+            </figure>
+          </div>
+          <div class="media-content index-text">
+            <i class="is-black index-text"><a href="/arts/user/{{comment.user.id}}"
+                class="user-link">{{comment.user.username}}</a></i>
+            <p class="subtitle is-5 is-black index-text">{{ comment.text }}</p>
+          </div>
+        </div>
       </div>
-      {% endif %}
     </div>
+    {% endif %}
+
+    {% endfor %}
+    {% else %}
+    <div class="card">
+      <i class="m-2">no Comments yet</i>
+    </div>
+    {% endif %}
   </div>
-  {% endblock %}
+</div>
+{% endblock %}

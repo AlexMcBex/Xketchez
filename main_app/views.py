@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Art, Photo
+from .models import Art, Photo, Comment
 from .forms import CommentForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -25,6 +25,7 @@ def about(req):
 
 def arts_index(req):
     arts= Art.objects.all()
+    print(req.path)
     return render(req, 'arts/index.html', { 'arts' : arts })
 
 @login_required
@@ -39,10 +40,8 @@ def arts_user(req, user_id):
 
 def arts_detail(req, art_id):
     art= Art.objects.get(id=art_id)
-
     comment_form = CommentForm()
-    
-    print(art.user.id)
+    # print(art.comment_set.all())
     return render(req, 'arts/detail.html', { 'art': art , 'comment_form': comment_form })
 
 
@@ -81,6 +80,10 @@ class ArtUpdate(LoginRequiredMixin, UpdateView):
 class ArtDelete(LoginRequiredMixin, DeleteView):
     model = Art
     success_url = '/arts/'
+
+class CommentDelete(LoginRequiredMixin, DeleteView):
+    model = Comment
+    success_url = '/arts/{art_id}'
 
 
 def signup(request):

@@ -209,7 +209,8 @@ main {
   }
 
 .user-link{
-  
+  color: goldenrod;
+  font-weight: bold;
 }
 
   .card-frame:hover .card-image {
