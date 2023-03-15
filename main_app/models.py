@@ -7,7 +7,7 @@ from django.utils.timezone import now
 class Art(models.Model):
     title = models.CharField(max_length=50)
     author = models.CharField(max_length=50)
-    type = models.CharField(max_length=50)
+    type = models.CharField(max_length=50, default='drawing')
     method = models.CharField(max_length=200)
     author_comment = models.CharField(max_length=300)
     likes = models.IntegerField(default=0)
@@ -24,9 +24,11 @@ class Art(models.Model):
     
     def increase_like(self):
         self.likes+=1
+        self.save()
 
     def decrease_like(self):
         self.likes -=1
+        self.save()
 
     class Meta:
         ordering = ['-date']
